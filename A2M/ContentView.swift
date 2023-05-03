@@ -2,7 +2,6 @@
 //  ContentView.swift
 //  A2M
 //
-//  Created by Tsz Hoi Leung on 3/5/2023.
 //
 
 import SwiftUI
