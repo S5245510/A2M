@@ -24,7 +24,6 @@ struct PlaceList: View {
                                 .clipped()
                             VStack(alignment: .leading) {
                                 Text(place.name ?? "")
-                                Text(place.location ?? "")
                             }
                         }
                     }
