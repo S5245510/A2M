@@ -31,6 +31,7 @@ struct PlaceList: View {
                 .onDelete(perform: deletePlaces)
                 .onMove(perform: movePlaces)
             }
+            .navigationBarTitle("My Favourite Places")
             .navigationBarItems(
                 leading: EditButton(),
                 trailing: HStack {

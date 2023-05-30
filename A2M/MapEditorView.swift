@@ -68,10 +68,9 @@ struct MapEditorView: View {
             // Update the initial values of latitude and longitude when the view appears
             latitude = "\(place.latitude)"
             longitude = "\(place.longitude)"
-        }
-        .task {
             checkMap()
         }
+
     }
     
     func checkAddress() {
@@ -90,6 +89,7 @@ struct MapEditorView: View {
             place.longitude = coordinate.longitude
             viewModel.savePlace(place: place)
         }
+        checkMap()
     }
 
     
@@ -101,6 +101,7 @@ struct MapEditorView: View {
         place.latitude = model.latitude
         place.longitude = model.longitude
         viewModel.savePlace(place: place)
+        checkMap()
     }
     
     func checkZoom() {
