@@ -64,6 +64,11 @@ struct MapEditorView: View {
             }
             .padding()
         }
+        .onAppear {
+            // Update the initial values of latitude and longitude when the view appears
+            latitude = "\(place.latitude)"
+            longitude = "\(place.longitude)"
+        }
         .task {
             checkMap()
         }
