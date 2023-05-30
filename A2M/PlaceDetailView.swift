@@ -8,35 +8,42 @@ struct PlaceDetailView: View {
     @State private var editedName: String = ""
     @State private var editedLocation: String = ""
     @State private var editedNotes: String = ""
-
+    
+    @State private var updatedPlace: Place // Add this line
+    
+    init(place: Place, viewModel: PlaceViewModel) {
+        self.place = place
+        self.viewModel = viewModel
+        self._updatedPlace = State(initialValue: place) // Add this line
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 10) {
-                Text(place.name ?? "")
+                Text(updatedPlace.name ?? "") // Update this line
                     .font(.title)
                     .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 if !isEditMode {
                     VStack(alignment: .leading, spacing: 10) {
-                    
-                        Text(place.location ?? "")
+                        Text(updatedPlace.location ?? "") // Update this line
                             .padding(.bottom)
                         Text("Description")
                             .font(.title)
                             .fontWeight(.bold)
                             .padding(.bottom)
-                        Text(place.notes ?? "")
+                        Text(updatedPlace.notes ?? "") // Update this line
                             .padding(.bottom)
                     }
-                    NavigationLink(destination: MapEditorView( place: place)) {
+                    NavigationLink(destination: MapEditorView(model: MyLocation.shared, place: $updatedPlace, viewModel: viewModel)) { // Update this line
                         VStack {
-                            Text("Map of \(place.name ?? "")")
+                            Text("Map of \(updatedPlace.name ?? "")") // Update this line
                                 .font(.title)
                                 .fontWeight(.bold)
-                            Text("\(place.latitude)")
-                            Text("\(place.longitude)")
+                            Text("\(updatedPlace.latitude)")
+                            Text("\(updatedPlace.longitude)")
                         }
                     }
-
                 } else {
                     VStack(alignment: .leading, spacing: 10) {
                         LabelTextField(label: "Name", placeHolder: "Fill in the location", text: $editedName)
@@ -63,16 +70,22 @@ struct PlaceDetailView: View {
             }
         })
         .onAppear {
-            editedName = place.name ?? ""
-            editedLocation = place.location ?? ""
-            editedNotes = place.notes ?? ""
+            editedName = updatedPlace.name ?? "" // Update this line
+            editedLocation = updatedPlace.location ?? ""
+            editedNotes = updatedPlace.notes ?? ""
         }
+        .onAppear {
+                    // Refresh the view and update the properties when it appears again
+                    editedName = place.name ?? ""
+                    editedLocation = place.location ?? ""
+                    editedNotes = place.notes ?? ""
+                }
     }
     
     private func savePlace() {
-        place.name = editedName
-        place.location = editedLocation
-        place.notes = editedNotes
-        viewModel.savePlace(place: place)
+        updatedPlace.name = editedName // Update this line
+        updatedPlace.location = editedLocation // Update this line
+        updatedPlace.notes = editedNotes // Update this line
+        viewModel.savePlace(place: updatedPlace) // Update this line
     }
 }

@@ -15,7 +15,7 @@ struct PlaceList: View {
         NavigationView {
             List {
                 ForEach(places) { place in
-                    NavigationLink(destination: PlaceDetailView(viewModel: viewModel, place: place)) {
+                    NavigationLink(destination: PlaceDetailView(place: place, viewModel: viewModel)) {
                         HStack {
                             Image(uiImage: UIImage(data: place.imageData ?? Data()) ?? UIImage())
                                 .resizable()
