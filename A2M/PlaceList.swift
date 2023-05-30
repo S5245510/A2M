@@ -17,15 +17,36 @@ struct PlaceList: View {
                 ForEach(places) { place in
                     NavigationLink(destination: PlaceDetailView(place: place, viewModel: viewModel)) {
                         HStack {
-                            Image(uiImage: UIImage(data: place.imageData ?? Data()) ?? UIImage())
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 50, height: 50)
-                                .clipped()
+                            if let imageData = Data(base64Encoded: place.imageData ?? "") {
+                                if let uiImage = UIImage(data: imageData) {
+                                    Image(uiImage: uiImage)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 50, height: 50)
+                                        .clipped()
+                                } else {
+                                    // Handle the case where the base64 data is invalid and cannot be converted to UIImage
+                                    // Display a placeholder image or handle the error as needed
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 50, height: 50)
+                                        .clipped()
+                                }
+                            } else {
+                                // Handle the case where the base64 data is empty or invalid
+                                // Display a placeholder image or handle the error as needed
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 50, height: 50)
+                                    .clipped()
+                            }
                             VStack(alignment: .leading) {
                                 Text(place.name ?? "")
                             }
                         }
+
                     }
                 }
                 .onDelete(perform: deletePlaces)
@@ -36,7 +57,7 @@ struct PlaceList: View {
                 leading: EditButton(),
                 trailing: HStack {
                     Button(action: {
-                        viewModel.addPlace(name: "New Place", location: "New Location", notes: "New Notes", latitude: 0.0, longitude: 0.0, imageData: Data())
+                        viewModel.addPlace(name: "New Place", location: "New Location", notes: "New Notes", latitude: 0.0, longitude: 0.0, imageData: "")
                     }) {
                         Image(systemName: "plus")
                     }

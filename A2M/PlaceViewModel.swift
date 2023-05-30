@@ -5,26 +5,10 @@ import SwiftUI
 class PlaceViewModel: ObservableObject {
     let context = PersistentStorageController.shared.context
     
-    func loadDefaultPlaces() {
-        let defaultPlaces = [["Place 1", "Location 1", "Note 1", 0.0, 0.0],
-                             ["Place 2", "Location 2", "Note 2", 0.0, 0.0],
-                             ["Place 3", "Location 3", "Note 3", 0.0, 0.0]]
-        
-        defaultPlaces.forEach {
-            let newPlace = Place(context: context)
-            newPlace.name = $0[0] as? String
-            newPlace.location = $0[1] as? String
-            newPlace.notes = $0[2] as? String
-            newPlace.latitude = $0[3] as? Double ?? 0.0
-            newPlace.longitude = $0[4] as? Double ?? 0.0
-            // Add your default imageData here
-            
-            saveContext()
-        }
-    }
 
 
-    func addPlace(name: String, location: String, notes: String, latitude: Double, longitude: Double, imageData: Data) {
+
+    func addPlace(name: String, location: String, notes: String, latitude: Double, longitude: Double, imageData: String) {
         let newPlace = Place(context: context)
         newPlace.name = name
         newPlace.location = location
@@ -44,6 +28,18 @@ class PlaceViewModel: ObservableObject {
         context.delete(place)
         saveContext()
     }
+    
+    func loadImage(for place: Place) -> Image {
+        if let imageDataString = place.imageData,
+           let imageURL = URL(string: imageDataString),
+           let imageData = try? Data(contentsOf: imageURL),
+           let uiImage = UIImage(data: imageData) {
+            return Image(uiImage: uiImage)
+        }
+
+        return Image(systemName: "photo")
+    }
+
 
     private func saveContext() {
         do {
