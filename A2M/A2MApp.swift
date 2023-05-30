@@ -6,15 +6,14 @@
 //
 
 import SwiftUI
-
 @main
 struct A2MApp: App {
-    let persistenceController = PersistenceController.shared
+    let persistentStorageController = PersistentStorageController.shared
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            PlaceList()
+                .environment(\.managedObjectContext, persistentStorageController.context)
         }
     }
 }

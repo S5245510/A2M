@@ -2,7 +2,7 @@
 //  defaultItems.swift
 //  A2M
 //
-import Foundation
+/*import Foundation
 
 struct DefaultItems {
     static let items = [
@@ -18,4 +18,16 @@ struct ChecklistItemData {
     var isChecked: Bool
     var imageData: Data?
 }
+ 
+ struct PlaceDetailView: View {
+     @Environment(\.managedObjectContext) private var viewContext
+     @ObservedObject var viewModel = PlaceViewModel()
+     let place: Place
+     @State private var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
 
+     var body: some View {
+         // ...
+     }
+ }
+
+*/

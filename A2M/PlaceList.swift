@@ -4,6 +4,7 @@ import Foundation
 
 struct PlaceList: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject private var viewModel = PlaceViewModel()
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Place.name, ascending: true)],
@@ -14,7 +15,7 @@ struct PlaceList: View {
         NavigationView {
             List {
                 ForEach(places) { place in
-                    NavigationLink(destination: PlaceDetailView(place: place)) {
+                    NavigationLink(destination: PlaceDetailView(viewModel: viewModel, place: place)) {
                         HStack {
                             Image(uiImage: UIImage(data: place.imageData ?? Data()) ?? UIImage())
                                 .resizable()
@@ -31,17 +32,24 @@ struct PlaceList: View {
                 .onDelete(perform: deletePlaces)
                 .onMove(perform: movePlaces)
             }
-            .navigationBarItems(trailing: EditButton())
+            .navigationBarItems(
+                leading: EditButton(),
+                trailing: HStack {
+                    Button(action: {
+                        viewModel.addPlace(name: "New Place", location: "New Location", notes: "New Notes", latitude: 0.0, longitude: 0.0, imageData: Data())
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                }
+            )
+
         }
     }
 
     private func deletePlaces(offsets: IndexSet) {
         withAnimation {
-            offsets.map { places[$0] }.forEach(viewContext.delete)
-            do {
-                try viewContext.save()
-            } catch {
-                // Handle the error
+            offsets.map { places[$0] }.forEach { place in
+                viewModel.deletePlace(place: place)
             }
         }
     }

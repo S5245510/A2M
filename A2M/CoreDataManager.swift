@@ -4,7 +4,7 @@
 //
 //
 
-import Foundation
+/*import Foundation
 import CoreData
 import UIKit
 
@@ -12,11 +12,7 @@ class CoreDataManager {
     
     static let shared = CoreDataManager()
     let context: NSManagedObjectContext!
-    
-    private init() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        context = appDelegate.persistentContainer.viewContext
-    }
+
     
     // Add new place
     func addPlace(name: String, location: String, notes: String, imageData: Data) {
@@ -56,3 +52,4 @@ class CoreDataManager {
         }
     }
 }
+*/

@@ -1,19 +1,21 @@
-//
-//  MapView.swift
-//  A2M
-//
-//  Created by Tsz Hoi Leung on 25/5/2023.
-//
-
-import Foundation
+import SwiftUI
 import MapKit
-
 
 struct MapView: View {
     @State var coordinate: CLLocationCoordinate2D
 
     var body: some View {
-        Map(coordinateRegion: $coordinate)
-            .edgesIgnoringSafeArea(.all)
+        Map(coordinateRegion: coordinateRegion)
+    }
+
+    private var coordinateRegion: Binding<MKCoordinateRegion> {
+        Binding(
+            get: {
+                MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+            },
+            set: {
+                coordinate = $0.center
+            }
+        )
     }
 }
