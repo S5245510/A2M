@@ -117,12 +117,12 @@
 		ADC967352A022D1000FB6D66 /* A2M */ = {
 			isa = PBXGroup;
 			children = (
-				ADB368CF2A25D9480049CB27 /* MapEditorView.swift */,
 				ADB368CB2A25B1FA0049CB27 /* PlaceViewModel.swift */,
 				AD540A572A1F459900918642 /* CoreDataManager.swift */,
 				AD540A552A1F442200918642 /* MapView.swift */,
 				AD2C31C22A038ADE0039D46B /* checklistItem.swift */,
 				AD4BCC942A0B531900BA967E /* Model.xcdatamodeld */,
+				ADB368CF2A25D9480049CB27 /* MapEditorView.swift */,
 				AD2C31BC2A038AB10039D46B /* PlaceDetailView.swift */,
 				ADB368D32A25EB280049CB27 /* LabelTextField.swift */,
 				ADC9673D2A022D1000FB6D66 /* PlaceList.swift */,

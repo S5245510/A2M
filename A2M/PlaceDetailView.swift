@@ -12,13 +12,12 @@ struct PlaceDetailView: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 10) {
-                Text("Map of \(place.name ?? "")")
+                Text(place.name ?? "")
                     .font(.title)
                     .fontWeight(.bold)
                 if !isEditMode {
                     VStack(alignment: .leading, spacing: 10) {
-                        Text(place.name ?? "")
-                            .padding(.bottom)
+                    
                         Text(place.location ?? "")
                             .padding(.bottom)
                         Text("Description")
@@ -28,12 +27,15 @@ struct PlaceDetailView: View {
                         Text(place.notes ?? "")
                             .padding(.bottom)
                     }
-                    NavigationLink(destination: MapEditorView(place: place), label: {
-                        HStack {
+                    NavigationLink(destination: MapEditorView( place: place)) {
+                        VStack {
+                            Text("Map of \(place.name ?? "")")
+                                .font(.title)
+                                .fontWeight(.bold)
                             Text("\(place.latitude)")
                             Text("\(place.longitude)")
                         }
-                    })
+                    }
 
                 } else {
                     VStack(alignment: .leading, spacing: 10) {
