@@ -4,13 +4,14 @@ import MapKit
 struct PlaceDetailView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var viewModel: PlaceViewModel
+    
     let place: Place
     @State private var isEditMode = false
     @State private var editedName: String = ""
     @State private var editedLocation: String = ""
     @State private var editedNotes: String = ""
     @State private var imageURL: String = ""
-    
+    @State private var viewLoaded = false
     @State private var updatedPlace: Place
     
     init(place: Place, viewModel: PlaceViewModel) {
@@ -21,6 +22,7 @@ struct PlaceDetailView: View {
     }
     
     var body: some View {
+        var viewLoaded = true
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 10) {
                 Text(updatedPlace.name ?? "")
@@ -85,17 +87,10 @@ struct PlaceDetailView: View {
             // Update latitude and longitude
             updatedPlace.latitude = place.latitude
             updatedPlace.longitude = place.longitude
+            viewLoaded = true
+        }
 
-        }
-        .onChange{
-            editedName = updatedPlace.name ?? ""
-            editedLocation = updatedPlace.location ?? ""
-            editedNotes = updatedPlace.notes ?? ""
-            imageURL = updatedPlace.imageData ?? ""
-            // Update latitude and longitude
-            updatedPlace.latitude = place.latitude
-            updatedPlace.longitude = place.longitude
-        }
+        
     }
     
     private func savePlace() {
