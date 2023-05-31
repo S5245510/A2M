@@ -82,6 +82,12 @@ struct PlaceDetailView: View {
             editedLocation = updatedPlace.location ?? ""
             editedNotes = updatedPlace.notes ?? ""
             imageURL = updatedPlace.imageData ?? ""
+            editedLocation = updatedPlace.location ?? ""
+            editedNotes = updatedPlace.notes ?? ""
+        }
+        .onChange(of: updatedPlace) { _ in
+            editedLocation = updatedPlace.location ?? ""
+            editedNotes = updatedPlace.notes ?? ""
         }
         .onChange(of: imageURL) { _ in
             updateImage()

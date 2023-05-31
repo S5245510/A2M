@@ -1,6 +1,5 @@
 import SwiftUI
 import MapKit
-
 struct MapEditorView: View {
     @ObservedObject var model: MyLocation
     @Binding var place: Place
@@ -21,17 +20,16 @@ struct MapEditorView: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 10) {
-                HStack{
+                HStack {
                     TextField("Address", text: Binding(
-                    get: { place.name ?? "" },
-                    set: { place.name = $0 }
+                        get: { place.name ?? "" },
+                        set: { place.name = $0 }
                     ))
                     Image(systemName: "sparkle.magnifyingglass")
                         .foregroundColor(.blue)
                         .onTapGesture {
                             checkAddress()
                         }
-                    
                 }
                 
                 HStack {
@@ -70,7 +68,6 @@ struct MapEditorView: View {
             longitude = "\(place.longitude)"
             checkMap()
         }
-
     }
     
     func checkAddress() {
@@ -88,10 +85,13 @@ struct MapEditorView: View {
             place.latitude = coordinate.latitude
             place.longitude = coordinate.longitude
             viewModel.savePlace(place: place)
+            
+            // Set zoom to 50% after updating the location
+            zoom = 30.0
+            checkZoom()
         }
         checkMap()
     }
-
     
     func checkLocation() {
         model.longStr = longitude
