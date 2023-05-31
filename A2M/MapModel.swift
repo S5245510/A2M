@@ -3,6 +3,8 @@
     import Foundation
     import CoreLocation
     import SwiftUI
+    import MapKit
+
     extension MyLocation {
         var latStr: String {
             get{String(format: "%.5f", latitude)}
@@ -80,4 +82,24 @@
             let c2 = 3.0
             delta = pow(10.0, zoom / c1 + c2)
         }
-    }
+        
+        
+
+
+        func reverseGeocode() {
+                let coder = CLGeocoder()
+                coder.reverseGeocodeLocation(CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)) { marks, error in
+                    if let err = error {
+                        print("error in reverseGeocode: \(err)")
+                        return
+                    }
+
+                    if let mark = marks?.first {
+                        self.country = mark.country
+                        self.postalCode = mark.postalCode
+                    }
+                }
+            }
+
+
+}

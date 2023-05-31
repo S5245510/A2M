@@ -49,21 +49,35 @@ struct MapEditorView: View {
                         checkZoom()
                     }
                 }
-                
-                ZStack {
-                    Map(coordinateRegion: $model.region)
+                HStack{
+                    ZStack {
+                        Map(coordinateRegion: $model.region)
+                    }
+                }
+                HStack{
                     VStack(alignment: .leading) {
                         Text("Latitude: \(model.region.center.latitude)").font(.footnote)
                         Text("Longitude: \(model.region.center.longitude)").font(.footnote)
-                        Button("Update") {
-                            checkMap()
+                        
+                    }
+                    Spacer()
+                    Button("Update"){checkMap()}
+                    Spacer()
+                    VStack(alignment: .leading) {
+                        if let country = model.country {
+                            Text("Country: \(country)").font(.footnote)
                         }
-                    }.offset(x: 10, y: 280)
+                        if let postalCode = model.postalCode {
+                            Text("Postal Code: \(postalCode)").font(.footnote)
+                        }
+                    }
+
+
                 }
             }
             .padding()
         }
-        .onAppear(perform: checkLocation)
+        .onAppear(perform: checkAddress)
     }
     
     func checkAddress() {
@@ -80,13 +94,15 @@ struct MapEditorView: View {
             model.setupRegion()
             place.latitude = coordinate.latitude
             place.longitude = coordinate.longitude
+            latitude = model.latStr
+            longitude = model.longStr
             viewModel.savePlace(place: place)
             
             // Set zoom to 50% after updating the location
             zoom = 30.0
-            checkZoom()
+            model.fromZoomToDelta(zoom)
+            model.setupRegion()
         }
-        checkMap()
     }
     
     func checkLocation() {
@@ -114,6 +130,7 @@ struct MapEditorView: View {
     
     func checkMap() {
         model.updateFromRegion()
+        
         latitude = model.latStr
         longitude = model.longStr
         place.latitude = model.latitude
@@ -126,13 +143,23 @@ struct MapEditorView: View {
                 // Handle error or show an alert
                 return
             }
-            
-            DispatchQueue.main.async {
+                model.reverseGeocode()
                 place.name = placemark.name
-                
+                place.latitude = model.latitude
+                place.longitude = model.longitude
                 viewModel.savePlace(place: place)
-            }
+                
+                if let country = placemark.country {
+                    model.country = country
+                }
+                
+                if let postalCode = placemark.postalCode {
+                    model.postalCode = postalCode
+                }
+            
         }
     }
 
+    
+    
 }

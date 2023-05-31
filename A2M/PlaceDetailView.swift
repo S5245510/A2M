@@ -52,8 +52,8 @@ struct PlaceDetailView: View {
                         VStack {
                             Text("Map of \(updatedPlace.name ?? "")")
                                 .fontWeight(.bold)
-                            Text("\(updatedPlace.latitude)")
-                            Text("\(updatedPlace.longitude)")
+                            Text("\(place.latitude)")
+                            Text("\(place.longitude)")
                         }
                     }
                 } else {
@@ -86,7 +86,6 @@ struct PlaceDetailView: View {
             // Update latitude and longitude
             updatedPlace.latitude = place.latitude
             updatedPlace.longitude = place.longitude
-            viewLoaded = true
         }
 
         
