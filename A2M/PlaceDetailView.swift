@@ -87,7 +87,6 @@ struct PlaceDetailView: View {
             // Update latitude and longitude
             updatedPlace.latitude = place.latitude
             updatedPlace.longitude = place.longitude
-            shouldRefresh = false
         }
         
     }
