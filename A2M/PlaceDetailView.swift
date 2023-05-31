@@ -5,8 +5,10 @@ struct PlaceDetailView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var viewModel: PlaceViewModel
     
+    
     let place: Place
     @State private var isEditMode = false
+    @State private var shouldRefresh = false
     @State private var editedName: String = ""
     @State private var editedLocation: String = ""
     @State private var editedNotes: String = ""
@@ -86,8 +88,8 @@ struct PlaceDetailView: View {
             // Update latitude and longitude
             updatedPlace.latitude = place.latitude
             updatedPlace.longitude = place.longitude
+            shouldRefresh = false
         }
-
         
     }
     

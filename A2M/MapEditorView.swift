@@ -78,6 +78,7 @@ struct MapEditorView: View {
             .padding()
         }
         .onAppear(perform: checkAddress)
+
     }
     
     func checkAddress() {
