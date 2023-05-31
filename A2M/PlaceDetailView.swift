@@ -22,7 +22,6 @@ struct PlaceDetailView: View {
     }
     
     var body: some View {
-        var viewLoaded = true
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 10) {
                 Text(updatedPlace.name ?? "")
