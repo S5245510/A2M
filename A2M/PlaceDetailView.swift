@@ -82,15 +82,19 @@ struct PlaceDetailView: View {
             editedLocation = updatedPlace.location ?? ""
             editedNotes = updatedPlace.notes ?? ""
             imageURL = updatedPlace.imageData ?? ""
+            // Update latitude and longitude
+            updatedPlace.latitude = place.latitude
+            updatedPlace.longitude = place.longitude
+
+        }
+        .onChange{
+            editedName = updatedPlace.name ?? ""
             editedLocation = updatedPlace.location ?? ""
             editedNotes = updatedPlace.notes ?? ""
-        }
-        .onChange(of: updatedPlace) { _ in
-            editedLocation = updatedPlace.location ?? ""
-            editedNotes = updatedPlace.notes ?? ""
-        }
-        .onChange(of: imageURL) { _ in
-            updateImage()
+            imageURL = updatedPlace.imageData ?? ""
+            // Update latitude and longitude
+            updatedPlace.latitude = place.latitude
+            updatedPlace.longitude = place.longitude
         }
     }
     

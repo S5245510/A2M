@@ -16,6 +16,7 @@
 		AD4BCC962A0B531900BA967E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD4BCC942A0B531900BA967E /* Model.xcdatamodeld */; };
 		AD540A562A1F442200918642 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD540A552A1F442200918642 /* MapView.swift */; };
 		AD540A582A1F459900918642 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD540A572A1F459900918642 /* CoreDataManager.swift */; };
+		AD5E56BB2A2713ED00BD9A75 /* MapEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5E56BA2A2713ED00BD9A75 /* MapEditorModel.swift */; };
 		ADB368CC2A25B1FA0049CB27 /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB368CB2A25B1FA0049CB27 /* PlaceViewModel.swift */; };
 		ADB368D02A25D9480049CB27 /* MapEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB368CF2A25D9480049CB27 /* MapEditorView.swift */; };
 		ADB368D42A25EB280049CB27 /* LabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB368D32A25EB280049CB27 /* LabelTextField.swift */; };
@@ -58,6 +59,7 @@
 		AD4BCC952A0B531900BA967E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		AD540A552A1F442200918642 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		AD540A572A1F459900918642 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		AD5E56BA2A2713ED00BD9A75 /* MapEditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEditorModel.swift; sourceTree = "<group>"; };
 		ADB368CB2A25B1FA0049CB27 /* PlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewModel.swift; sourceTree = "<group>"; };
 		ADB368CF2A25D9480049CB27 /* MapEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEditorView.swift; sourceTree = "<group>"; };
 		ADB368D32A25EB280049CB27 /* LabelTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextField.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		ADC9672A2A022D1000FB6D66 = {
 			isa = PBXGroup;
 			children = (
+				AD5E56BA2A2713ED00BD9A75 /* MapEditorModel.swift */,
 				AD40A16C2A26B994000F728F /* ImageModel.swift */,
 				ADC967352A022D1000FB6D66 /* A2M */,
 				ADC9674C2A022D1100FB6D66 /* A2MTests */,
@@ -305,6 +308,7 @@
 				AD540A562A1F442200918642 /* MapView.swift in Sources */,
 				ADC967372A022D1000FB6D66 /* A2MApp.swift in Sources */,
 				AD40A1692A2697A0000F728F /* MapDataModel.swift in Sources */,
+				AD5E56BB2A2713ED00BD9A75 /* MapEditorModel.swift in Sources */,
 				ADC9673E2A022D1000FB6D66 /* PlaceList.swift in Sources */,
 				ADB368D02A25D9480049CB27 /* MapEditorView.swift in Sources */,
 				AD4BCC962A0B531900BA967E /* Model.xcdatamodeld in Sources */,

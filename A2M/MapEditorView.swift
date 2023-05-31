@@ -1,5 +1,6 @@
 import SwiftUI
 import MapKit
+
 struct MapEditorView: View {
     @ObservedObject var model: MyLocation
     @Binding var place: Place
@@ -62,12 +63,7 @@ struct MapEditorView: View {
             }
             .padding()
         }
-        .onAppear {
-            // Update the initial values of latitude and longitude when the view appears
-            latitude = "\(place.latitude)"
-            longitude = "\(place.longitude)"
-            checkMap()
-        }
+        .onAppear(perform: checkLocation)
     }
     
     func checkAddress() {
@@ -102,6 +98,8 @@ struct MapEditorView: View {
         place.longitude = model.longitude
         viewModel.savePlace(place: place)
         checkMap()
+        zoom = 30.0
+        checkZoom()
     }
     
     func checkZoom() {
@@ -120,7 +118,21 @@ struct MapEditorView: View {
         longitude = model.longStr
         place.latitude = model.latitude
         place.longitude = model.longitude
-        model.fromLocToAddress()
-        viewModel.savePlace(place: place)
+        
+        let geocoder = CLGeocoder()
+        let location = CLLocation(latitude: model.latitude, longitude: model.longitude)
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            guard let placemark = placemarks?.first, error == nil else {
+                // Handle error or show an alert
+                return
+            }
+            
+            DispatchQueue.main.async {
+                place.name = placemark.name
+                
+                viewModel.savePlace(place: place)
+            }
+        }
     }
+
 }
