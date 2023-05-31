@@ -8,7 +8,6 @@ struct PlaceDetailView: View {
     
     let place: Place
     @State private var isEditMode = false
-    @State private var shouldRefresh = false
     @State private var editedName: String = ""
     @State private var editedLocation: String = ""
     @State private var editedNotes: String = ""
