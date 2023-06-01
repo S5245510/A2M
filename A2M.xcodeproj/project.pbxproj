@@ -18,7 +18,7 @@
 		AD21D19B2A28A885000E41C2 /* CoreDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD21D19A2A28A885000E41C2 /* CoreDataTest.swift */; };
 		AD21D19C2A28AB72000E41C2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD4BCC942A0B531900BA967E /* Model.xcdatamodeld */; };
 		AD21D19D2A28AB85000E41C2 /* MapEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB368CF2A25D9480049CB27 /* MapEditorView.swift */; };
-		AD21D19F2A28B6A8000E41C2 /* AppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD21D19E2A28B6A8000E41C2 /* AppTest.swift */; };
+		AD21D1A12A28CD4A000E41C2 /* Empty.md in Resources */ = {isa = PBXBuildFile; fileRef = AD21D1A02A28CD4A000E41C2 /* Empty.md */; };
 		AD2C31BD2A038AB10039D46B /* PlaceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2C31BC2A038AB10039D46B /* PlaceDetailView.swift */; };
 		AD2FA9232A27912A004CEC57 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2FA9222A27912A004CEC57 /* LoadingView.swift */; };
 		AD40A1672A268CF5000F728F /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD40A1662A268CF5000F728F /* MapModel.swift */; };
@@ -56,7 +56,7 @@
 
 /* Begin PBXFileReference section */
 		AD21D19A2A28A885000E41C2 /* CoreDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTest.swift; sourceTree = "<group>"; };
-		AD21D19E2A28B6A8000E41C2 /* AppTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTest.swift; sourceTree = "<group>"; };
+		AD21D1A02A28CD4A000E41C2 /* Empty.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Empty.md; sourceTree = "<group>"; };
 		AD2C31BC2A038AB10039D46B /* PlaceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailView.swift; sourceTree = "<group>"; };
 		AD2FA9222A27912A004CEC57 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		AD40A1662A268CF5000F728F /* MapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
@@ -107,6 +107,7 @@
 		ADC9672A2A022D1000FB6D66 = {
 			isa = PBXGroup;
 			children = (
+				AD21D1A02A28CD4A000E41C2 /* Empty.md */,
 				AD2FA9222A27912A004CEC57 /* LoadingView.swift */,
 				ADC967352A022D1000FB6D66 /* A2M */,
 				ADC9674C2A022D1100FB6D66 /* A2MTests */,
@@ -158,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				AD21D19A2A28A885000E41C2 /* CoreDataTest.swift */,
-				AD21D19E2A28B6A8000E41C2 /* AppTest.swift */,
 			);
 			path = A2MTests;
 			sourceTree = "<group>";
@@ -278,6 +278,7 @@
 			files = (
 				ADC967442A022D1100FB6D66 /* Preview Assets.xcassets in Resources */,
 				ADC967402A022D1100FB6D66 /* Assets.xcassets in Resources */,
+				AD21D1A12A28CD4A000E41C2 /* Empty.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +329,6 @@
 				AD21D1972A28A770000E41C2 /* A2MApp.swift in Sources */,
 				AD21D1962A28A76E000E41C2 /* PlaceList.swift in Sources */,
 				AD21D1912A28A75D000E41C2 /* PlaceViewModel.swift in Sources */,
-				AD21D19F2A28B6A8000E41C2 /* AppTest.swift in Sources */,
 				AD21D1952A28A769000E41C2 /* PlaceDetailView.swift in Sources */,
 				AD21D1942A28A767000E41C2 /* MapModel.swift in Sources */,
 				AD21D19D2A28AB85000E41C2 /* MapEditorView.swift in Sources */,

@@ -30,6 +30,7 @@ struct PlaceDetailView: View {
                     .font(.title)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                // to check if there is a URL otherwise show Grey color
                 if !isEditMode {
                     VStack(alignment: .leading, spacing: 10) {
 
@@ -50,7 +51,7 @@ struct PlaceDetailView: View {
                             .padding(.bottom)
                         Text(updatedPlace.notes ?? "")
                             .padding(.bottom)
-                    }
+                    }// to show Detail from Mapeditor
                     NavigationLink(destination: MapEditorView(model: MyLocation.shared, place: $updatedPlace, viewModel: viewModel, viewID : $viewID)) {
                         VStack(alignment: .leading) {
                             Text("Map of \(updatedPlace.name ?? "")")
@@ -59,7 +60,7 @@ struct PlaceDetailView: View {
                             Text("\(updatedPlace.longitude)")
                         }
                     }
-                } else {
+                } else {// Created a fill in form with placeholder for users
                     VStack(alignment: .leading, spacing: 10) {
                         LabelTextField(label: "Name", placeHolder: "Fill in the location", text: $editedName)
                         LabelTextField(label: "Image", placeHolder: "Fill in the URL", text: $imageURL)
@@ -88,7 +89,7 @@ struct PlaceDetailView: View {
             updateAll()
         
         }
-        // use change of viewID to force reloading
+        // use change of viewID to force reloading when returning from Mapeditor
         .onChange(of: viewID){ newValue in
             updateAll()
         }
