@@ -9,8 +9,8 @@ final class PlaceDataTests: XCTestCase {
     let testName = "Test Place"
     let testLocation = "Test Location"
     let testNotes = "Test Notes"
-    let testLatitude: Double = 37.7749
-    let testLongitude: Double = -122.4194
+    let testLatitude: Double = 23
+    let testLongitude: Double = -23
     let testImageData = "Test Image Data"
 
     // MARK: - Test Case

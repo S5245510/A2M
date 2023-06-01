@@ -34,8 +34,7 @@ struct PlaceList: View {
                                         .clipped()
                                 }
                             } else {
-                                // Handle the case where the base64 data is empty or invalid
-                                // Display a placeholder image or handle the error as needed
+
                                 Image(systemName: "photo")
                                     .resizable()
                                     .scaledToFill()
@@ -51,6 +50,11 @@ struct PlaceList: View {
                 }
                 .onDelete(perform: deletePlaces)
                 .onMove(perform: movePlaces)
+            }
+            .task {
+                if places.isEmpty {
+                    viewModel.loadDefaultData()
+                }
             }
             .navigationBarTitle("My Favourite Places")
             .navigationBarItems(

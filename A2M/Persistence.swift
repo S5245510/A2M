@@ -5,7 +5,8 @@ class PersistentStorageController {
 
     let context: NSManagedObjectContext
 
-    private init() {
+
+    init() {
         let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores { (_, error) in
             if let error = error as NSError? {
