@@ -5,6 +5,7 @@ struct PlaceDetailView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var viewModel: PlaceViewModel
     @State private var viewID: Int = 0
+    @State private var isLoading = false
     
     let place: Place
     @State private var isEditMode = false
@@ -23,7 +24,6 @@ struct PlaceDetailView: View {
     }
     
     var body: some View {
-
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Text(updatedPlace.name ?? "")
@@ -71,39 +71,40 @@ struct PlaceDetailView: View {
             
             Spacer()
         }
+
         .navigationBarItems(trailing: HStack {
             Button(action: {
                 if isEditMode {
                     savePlace()
+                    updateAll()
                 }
                 isEditMode.toggle() // Toggle the edit mode state
+                isLoading = true
             }) {
                 Text(isEditMode ? "Done" : "Edit")
             }
         })
         .onAppear {
-            editedName = updatedPlace.name ?? ""
-            editedLocation = updatedPlace.location ?? ""
-            editedNotes = updatedPlace.notes ?? ""
-            imageURL = updatedPlace.imageData ?? ""
-            // Update latitude and longitude
-            updatedPlace.latitude = place.latitude
-            updatedPlace.longitude = place.longitude
-            updateImage()
-            savePlace()
+            updateAll()
         
         }
         // use change of viewID to force reloading
         .onChange(of: viewID){ newValue in
-            editedName = updatedPlace.name ?? ""
-            editedLocation = updatedPlace.location ?? ""
-            editedNotes = updatedPlace.notes ?? ""
-            imageURL = updatedPlace.imageData ?? ""
-            // Update latitude and longitude
-            updatedPlace.latitude = place.latitude
-            updatedPlace.longitude = place.longitude
+            updateAll()
         }
         
+    }
+    
+    private func updateAll() {
+        editedName = updatedPlace.name ?? ""
+        editedLocation = updatedPlace.location ?? ""
+        editedNotes = updatedPlace.notes ?? ""
+        imageURL = updatedPlace.imageData ?? ""
+        // Update latitude and longitude
+        updatedPlace.latitude = place.latitude
+        updatedPlace.longitude = place.longitude
+        updateImage()
+        savePlace()
     }
     
     private func savePlace() {
