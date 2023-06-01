@@ -8,10 +8,12 @@ struct MapEditorView: View {
     @State private var latitude: String
     @State private var longitude: String
     @State private var zoom: Double
+    @Binding var viewID: Int
     
-    init(model: MyLocation, place: Binding<Place>, viewModel: PlaceViewModel) {
+    init(model: MyLocation, place: Binding<Place>, viewModel: PlaceViewModel, viewID: Binding<Int>) {
         self.model = model
         self._place = place
+        self._viewID = viewID
         self.viewModel = viewModel
         self._latitude = State(initialValue: "\(place.wrappedValue.latitude)")
         self._longitude = State(initialValue: "\(place.wrappedValue.longitude)")
@@ -78,7 +80,10 @@ struct MapEditorView: View {
             .padding()
         }
         .onAppear(perform: checkAddress)
-
+        .onDisappear{
+            viewID += 1
+        }
+        
     }
     
     func checkAddress() {

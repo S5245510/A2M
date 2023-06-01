@@ -4,7 +4,7 @@ import MapKit
 struct PlaceDetailView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var viewModel: PlaceViewModel
-    
+    @State private var viewID: Int = 0
     
     let place: Place
     @State private var isEditMode = false
@@ -23,8 +23,9 @@ struct PlaceDetailView: View {
     }
     
     var body: some View {
+
         VStack(alignment: .leading) {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading) {
                 Text(updatedPlace.name ?? "")
                     .font(.title)
                     .fontWeight(.bold)
@@ -32,7 +33,7 @@ struct PlaceDetailView: View {
                 if !isEditMode {
                     VStack(alignment: .leading, spacing: 10) {
 
-                        if let imageDataString = place.imageData,
+                        if let imageDataString = updatedPlace.imageData,
                            let imageData = Data(base64Encoded: imageDataString),
                            let image = UIImage(data: imageData) {
                             Image(uiImage: image)
@@ -42,6 +43,7 @@ struct PlaceDetailView: View {
                         } else {
                             Color.gray
                         }
+
                         Text("Description")
                             .font(.title)
                             .fontWeight(.bold)
@@ -49,12 +51,12 @@ struct PlaceDetailView: View {
                         Text(updatedPlace.notes ?? "")
                             .padding(.bottom)
                     }
-                    NavigationLink(destination: MapEditorView(model: MyLocation.shared, place: $updatedPlace, viewModel: viewModel)) {
-                        VStack {
+                    NavigationLink(destination: MapEditorView(model: MyLocation.shared, place: $updatedPlace, viewModel: viewModel, viewID : $viewID)) {
+                        VStack(alignment: .leading) {
                             Text("Map of \(updatedPlace.name ?? "")")
                                 .fontWeight(.bold)
-                            Text("\(place.latitude)")
-                            Text("\(place.longitude)")
+                            Text("\(updatedPlace.latitude)")
+                            Text("\(updatedPlace.longitude)")
                         }
                     }
                 } else {
@@ -87,23 +89,46 @@ struct PlaceDetailView: View {
             // Update latitude and longitude
             updatedPlace.latitude = place.latitude
             updatedPlace.longitude = place.longitude
+            updateImage()
+            savePlace()
+        
+        }
+        // use change of viewID to force reloading
+        .onChange(of: viewID){ newValue in
+            editedName = updatedPlace.name ?? ""
+            editedLocation = updatedPlace.location ?? ""
+            editedNotes = updatedPlace.notes ?? ""
+            imageURL = updatedPlace.imageData ?? ""
+            // Update latitude and longitude
+            updatedPlace.latitude = place.latitude
+            updatedPlace.longitude = place.longitude
         }
         
     }
     
     private func savePlace() {
-        updatedPlace.name = editedName
-        updatedPlace.location = editedLocation
-        updatedPlace.notes = editedNotes
-        viewModel.savePlace(place: updatedPlace)
+        place.name = editedName
+        place.location = editedLocation
+        place.notes = editedNotes
+        place.imageData = imageURL
+        viewModel.savePlace(place: place)
+
     }
     
     private func updateImage() {
-        if let url = URL(string: imageURL),
-           let imageData = try? Data(contentsOf: url) {
-            let base64String = imageData.base64EncodedString()
-            updatedPlace.imageData = base64String
-            viewModel.savePlace(place: updatedPlace)
+        guard let url = URL(string: imageURL) else {
+            return
         }
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let data = data, let _ = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.place.imageData = data.base64EncodedString()
+                    self.viewModel.savePlace(place: self.place)
+                }
+            }
+        }.resume()
     }
+
+
 }
